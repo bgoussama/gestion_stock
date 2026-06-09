@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Fournisseurs')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: nav}"></div>
+<main class="container-fluid py-4">
+    <div class="page-title"><div><h1>Fournisseurs</h1><p>Contacts et partenaires commerciaux.</p></div></div>
+    <div class="row g-4">
+        <section class="col-lg-4">
+            <form class="panel" th:action="@{/suppliers}" th:object="${supplier}" method="post">
+                <div class="panel-header">
+                    <div>
+                        <h2>Nouveau fournisseur</h2>
+                        <p>Coordonnees et contact commercial.</p>
+                    </div>
+                </div>
+                <label class="form-label">Nom</label>
+                <input class="form-control mb-3" th:field="*{name}">
+                <label class="form-label">Email</label>
+                <input class="form-control mb-3" type="email" th:field="*{email}">
+                <label class="form-label">Telephone</label>
+                <input class="form-control mb-3" th:field="*{phone}">
+                <label class="form-label">Adresse</label>
+                <textarea class="form-control mb-3" th:field="*{address}"></textarea>
+                <button class="btn btn-primary">Ajouter</button>
+            </form>
+        </section>
+        <section class="col-lg-8">
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Annuaire fournisseurs</h2>
+                        <p>Contacts disponibles pour reapprovisionnement.</p>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Nom</th><th>Email</th><th>Telephone</th><th>Adresse</th><th></th></tr></thead>
+                        <tbody>
+                        <tr th:each="supplier : ${suppliers}">
+                            <td th:text="${supplier.name}"></td>
+                            <td th:text="${supplier.email}"></td>
+                            <td th:text="${supplier.phone}"></td>
+                            <td th:text="${supplier.address}"></td>
+                            <td class="text-end">
+                                <form th:action="@{/suppliers/{id}/delete(id=${supplier.id})}" method="post">
+                                    <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(suppliers)}"><td colspan="5" class="text-center text-secondary">Aucun fournisseur.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

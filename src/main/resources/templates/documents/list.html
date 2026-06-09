@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Documents')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: nav}"></div>
+<main class="container-fluid py-4">
+    <div class="page-title"><div><h1>Documents et factures</h1><p>Generation et archivage des pieces commerciales en PDF.</p></div></div>
+    <div class="row g-4">
+        <section class="col-lg-4">
+            <form class="panel" th:action="@{/documents}" th:object="${document}" method="post">
+                <div class="panel-header">
+                    <div>
+                        <h2>Nouveau document</h2>
+                        <p>BL, bon d'entree, bon de sortie ou facture.</p>
+                    </div>
+                </div>
+                <label class="form-label">Type</label>
+                <select class="form-select mb-3" th:field="*{type}">
+                    <option th:each="type : ${types}" th:value="${type}" th:text="${type}"></option>
+                </select>
+                <label class="form-label">Numero</label>
+                <input class="form-control mb-3" th:field="*{number}">
+                <label class="form-label">Client / destinataire</label>
+                <input class="form-control mb-3" th:field="*{customerName}">
+                <label class="form-label">Description</label>
+                <textarea class="form-control mb-3" th:field="*{description}"></textarea>
+                <button class="btn btn-primary">Creer</button>
+            </form>
+        </section>
+        <section class="col-lg-8">
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Archive documentaire</h2>
+                        <p>Pieces disponibles au telechargement.</p>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead><tr><th>Date</th><th>Type</th><th>Numero</th><th>Client</th><th></th></tr></thead>
+                        <tbody>
+                        <tr th:each="document : ${documents}">
+                            <td th:text="${#temporals.format(document.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+                            <td><span class="badge text-bg-primary" th:text="${document.type}"></span></td>
+                            <td th:text="${document.number}"></td>
+                            <td th:text="${document.customerName}"></td>
+                            <td class="text-end"><a class="btn btn-sm btn-outline-primary" th:href="@{/documents/{id}/pdf(id=${document.id})}"><i class="bi bi-download"></i> PDF</a></td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(documents)}"><td colspan="5" class="text-center text-secondary">Aucun document archive.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

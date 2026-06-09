@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Connexion')}"></head>
+<body class="login-page">
+<main class="login-shell">
+    <section class="login-visual" aria-hidden="true">
+        <div class="login-brand-lock"><i class="bi bi-shield-lock"></i></div>
+        <div class="login-visual-copy">
+            <span>StockPilot</span>
+            <strong>Inventaire securise et suivi operationnel.</strong>
+        </div>
+    </section>
+    <section class="login-panel">
+        <div class="login-panel-header">
+            <span class="brand-mark"><i class="bi bi-boxes"></i></span>
+            <div>
+                <h1>Connexion</h1>
+                <p>Acces administrateur unique.</p>
+            </div>
+        </div>
+        <div th:if="${param.error}" class="alert alert-danger">Identifiants incorrects.</div>
+        <div th:if="${param.logout}" class="alert alert-success">Session fermee.</div>
+        <div th:if="${param.expired}" class="alert alert-warning">Session expiree. Reconnecte-toi.</div>
+        <form th:action="@{/login}" method="post" class="login-form">
+            <div class="mb-3">
+                <label class="form-label" for="username">Utilisateur</label>
+                <div class="input-with-icon">
+                    <i class="bi bi-person"></i>
+                    <input class="form-control" id="username" name="username" value="admin" autocomplete="username" autofocus>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">Mot de passe</label>
+                <div class="input-with-icon password-field">
+                    <i class="bi bi-key"></i>
+                    <input class="form-control" id="password" name="password" type="password" autocomplete="current-password">
+                    <button class="password-toggle" type="button" data-password-toggle data-target="#password"
+                            aria-label="Afficher le mot de passe" title="Afficher le mot de passe">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+            </div>
+            <button class="btn btn-primary w-100" type="submit">
+                <i class="bi bi-box-arrow-in-right"></i> Se connecter
+            </button>
+        </form>
+        <small class="text-secondary d-block mt-3">Utilisateur autorise: admin</small>
+    </section>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

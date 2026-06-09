@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Alertes')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: nav}"></div>
+<main class="container-fluid py-4">
+    <div class="page-title"><div><h1>Alertes de seuil</h1><p>Priorisation des ruptures potentielles et suivi de resolution.</p></div></div>
+    <div class="panel">
+        <div class="panel-header">
+            <div>
+                <h2>Centre d'alertes</h2>
+                <p>Chaque alerte active correspond a un produit sous son seuil.</p>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead><tr><th>Date</th><th>Produit</th><th>Message</th><th>Statut</th><th></th></tr></thead>
+                <tbody>
+                <tr th:each="alert : ${alerts}">
+                    <td th:text="${#temporals.format(alert.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+                    <td th:text="${alert.product.name}"></td>
+                    <td th:text="${alert.message}"></td>
+                    <td><span class="badge" th:classappend="${alert.resolved} ? ' text-bg-success' : ' text-bg-warning'" th:text="${alert.resolved} ? 'Resolue' : 'Active'"></span></td>
+                    <td class="text-end">
+                        <form th:if="${!alert.resolved}" th:action="@{/alerts/{id}/resolve(id=${alert.id})}" method="post">
+                            <button class="btn btn-sm btn-outline-success">Resoudre</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(alerts)}"><td colspan="5" class="text-center text-secondary">Aucune alerte.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

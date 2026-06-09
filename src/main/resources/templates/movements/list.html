@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Mouvements')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: nav}"></div>
+<main class="container-fluid py-4">
+    <div class="page-title"><div><h1>Mouvements de stock</h1><p>Saisie controlee des flux avec mise a jour instantanee des quantites.</p></div></div>
+    <div class="row g-4">
+        <section class="col-lg-4">
+            <form class="panel" th:action="@{/movements}" th:object="${movement}" method="post">
+                <div class="panel-header">
+                    <div>
+                        <h2>Nouveau mouvement</h2>
+                        <p>Entree, sortie magasin ou livraison client.</p>
+                    </div>
+                </div>
+                <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+                <label class="form-label">Produit</label>
+                <select class="form-select mb-3" th:field="*{product}">
+                    <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.reference + ' - ' + product.name}"></option>
+                </select>
+                <label class="form-label">Type</label>
+                <select class="form-select mb-3" th:field="*{type}">
+                    <option th:each="type : ${types}" th:value="${type}" th:text="${type}"></option>
+                </select>
+                <label class="form-label">Quantite</label>
+                <input class="form-control mb-3" type="number" min="1" th:field="*{quantity}">
+                <label class="form-label">Reference document</label>
+                <input class="form-control mb-3" th:field="*{referenceDocument}">
+                <label class="form-label">Note</label>
+                <textarea class="form-control mb-3" th:field="*{note}"></textarea>
+                <button class="btn btn-primary">Enregistrer</button>
+            </form>
+        </section>
+        <section class="col-lg-8">
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Journal des mouvements</h2>
+                        <p>Les 20 operations les plus recentes.</p>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead><tr><th>Date</th><th>Produit</th><th>Type</th><th>Quantite</th><th>Document</th><th>Note</th></tr></thead>
+                        <tbody>
+                        <tr th:each="movement : ${movements}">
+                            <td th:text="${#temporals.format(movement.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+                            <td th:text="${movement.product.name}"></td>
+                            <td><span class="badge text-bg-primary" th:text="${movement.type}"></span></td>
+                            <td th:text="${movement.quantity}"></td>
+                            <td th:text="${movement.referenceDocument} ?: '-'"></td>
+                            <td th:text="${movement.note} ?: '-'"></td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(movements)}"><td colspan="6" class="text-center text-secondary">Aucun mouvement enregistre.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>

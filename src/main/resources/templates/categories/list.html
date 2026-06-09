@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Categories')}"></head>
+<body>
+<div th:replace="~{fragments/layout :: nav}"></div>
+<main class="container-fluid py-4">
+    <div class="page-title"><div><h1>Categories</h1><p>Organisation du catalogue produit.</p></div></div>
+    <div class="row g-4">
+        <section class="col-lg-4">
+            <form class="panel" th:action="@{/categories}" th:object="${category}" method="post">
+                <div class="panel-header">
+                    <div>
+                        <h2>Nouvelle categorie</h2>
+                        <p>Structurer les familles produit.</p>
+                    </div>
+                </div>
+                <label class="form-label">Nom</label>
+                <input class="form-control mb-3" th:field="*{name}">
+                <label class="form-label">Description</label>
+                <textarea class="form-control mb-3" th:field="*{description}"></textarea>
+                <button class="btn btn-primary">Ajouter</button>
+            </form>
+        </section>
+        <section class="col-lg-8">
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Liste des categories</h2>
+                        <p>Referentiel utilise par le catalogue produits.</p>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead><tr><th>Nom</th><th>Description</th><th></th></tr></thead>
+                        <tbody>
+                        <tr th:each="category : ${categories}">
+                            <td th:text="${category.name}"></td>
+                            <td th:text="${category.description}"></td>
+                            <td class="text-end">
+                                <form th:action="@{/categories/{id}/delete(id=${category.id})}" method="post">
+                                    <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(categories)}"><td colspan="3" class="text-center text-secondary">Aucune categorie.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+<script th:replace="~{fragments/layout :: scripts}"></script>
+</body>
+</html>
