@@ -1,7 +1,49 @@
 # StockPilot - Stock Management Web Application
 
-StockPilot is a web application developed with **Spring Boot** for managing product inventory in a simple and organized way.  
-The application allows an administrator to manage products, categories, suppliers, stock movements, threshold alerts, and commercial documents.
+> Complete Spring Boot inventory management platform for tracking products, suppliers,
+> stock movements, threshold alerts, and commercial documents through a secure web interface.
+
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-Web%20Application-brightgreen)
+![Security](https://img.shields.io/badge/security-Spring%20Security-red)
+![Database](https://img.shields.io/badge/database-H2%20%7C%20MySQL-blue)
+![Frontend](https://img.shields.io/badge/frontend-Thymeleaf%20%7C%20Bootstrap-purple)
+![PDF](https://img.shields.io/badge/documents-Apache%20PDFBox-yellow)
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Project Objective](#project-objective)
+- [Main Features](#main-features)
+- [Technology Stack](#technology-stack)
+- [Architecture](#architecture)
+- [Application Modules](#application-modules)
+- [Screenshots](#screenshots)
+- [Installation and Execution](#installation-and-execution)
+- [Login Credentials](#login-credentials)
+- [Database](#database)
+- [Tests](#tests)
+- [Main Routes](#main-routes)
+- [Project Structure](#project-structure)
+- [Security Considerations](#security-considerations)
+- [Future Improvements](#future-improvements)
+- [Author](#author)
+- [Conclusion](#conclusion)
+
+---
+
+## Overview
+
+**StockPilot** is a web application developed with Spring Boot for managing product
+inventory in a simple, secure, and organized way.
+
+The platform allows an administrator to manage products, categories, suppliers, stock
+movements, threshold alerts, and commercial documents from a centralized interface.
+
+It combines backend business logic, database persistence, authentication, server-side
+rendering, responsive design, and PDF generation in a layered Java architecture.
 
 ---
 
@@ -29,7 +71,7 @@ The application tracks available quantities, records incoming and outgoing stock
 
 ---
 
-## Technologies Used
+## Technology Stack
 
 - Java
 - Spring Boot
@@ -44,7 +86,7 @@ The application tracks available quantities, records incoming and outgoing stock
 
 ---
 
-## Project Architecture
+## Architecture
 
 The project follows a layered architecture:
 
@@ -58,7 +100,7 @@ src/main/java
       └── service
 ```
 
-### Package Roles
+### Package Responsibilities
 
 | Package | Description |
 |---|---|
@@ -236,7 +278,7 @@ The tests verify:
 
 ---
 
-## Simplified Project Structure
+## Project Structure
 
 ```text
 gestion_stock
@@ -257,7 +299,27 @@ gestion_stock
 
 ---
 
-## Possible Improvements
+## Security Considerations
+
+The application uses Spring Security to protect its internal features and restrict access
+to authenticated administrators.
+
+For production deployment, the following measures are recommended:
+
+* change the default administrator credentials;
+* store credentials and database secrets in environment variables;
+* use HTTPS for all communications;
+* disable the H2 console outside development environments;
+* validate all user input on the server side;
+* apply role-based access control for future user types;
+* configure secure session and cookie settings;
+* keep Spring Boot dependencies updated;
+* perform regular database backups;
+* record sensitive administrative actions in audit logs.
+
+---
+
+## Future Improvements
 
 * Add multiple user roles
 * Add a warehouse manager role
@@ -277,3 +339,18 @@ Project developed as part of an academic assignment.
 **Application:** StockPilot  
 **Type:** Stock management web application  
 **Technologies:** Spring Boot, Thymeleaf, Spring Data JPA, Spring Security
+
+---
+
+## Conclusion
+
+StockPilot demonstrates how Spring Boot can be used to build a complete and structured
+inventory management application.
+
+The project combines secure authentication, layered architecture, product and supplier
+management, automatic stock updates, threshold alerts, and PDF document generation in a
+single responsive web platform.
+
+It provides a solid foundation for future improvements such as multiple user roles,
+barcode support, batch tracking, warehouse-location management, and a REST API for mobile
+integration.
