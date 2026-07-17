@@ -1,36 +1,35 @@
-````markdown
-# StockPilot - Application Web de Gestion de Stock
+# StockPilot - Stock Management Web Application
 
-StockPilot est une application web développée avec **Spring Boot** permettant de gérer un stock de produits de manière simple et organisée.  
-L'application permet à un administrateur de gérer les produits, les catégories, les fournisseurs, les mouvements de stock, les alertes de seuil et les documents commerciaux.
-
----
-
-## Objectif du projet
-
-L'objectif principal de ce projet est de proposer une solution web complète pour la gestion de stock.  
-L'application permet de suivre les quantités disponibles, d'enregistrer les entrées et sorties, de détecter les produits proches de la rupture et de générer des documents commerciaux au format PDF.
+StockPilot is a web application developed with **Spring Boot** for managing product inventory in a simple and organized way.  
+The application allows an administrator to manage products, categories, suppliers, stock movements, threshold alerts, and commercial documents.
 
 ---
 
-## Fonctionnalités principales
+## Project Objective
 
-- Authentification sécurisée de l'administrateur
-- Tableau de bord avec indicateurs clés
-- Gestion complète des produits
-- Gestion des catégories
-- Gestion des fournisseurs
-- Enregistrement des mouvements de stock
-- Suivi des entrées, sorties et livraisons
-- Détection automatique des alertes de seuil
-- Résolution des alertes
-- Création de documents commerciaux
-- Génération et téléchargement de documents PDF
-- Interface web responsive avec Thymeleaf et Bootstrap
+The main objective of this project is to provide a complete web-based stock management solution.  
+The application tracks available quantities, records incoming and outgoing stock, detects products approaching stock-out, and generates commercial documents in PDF format.
 
 ---
 
-## Technologies utilisées
+## Main Features
+
+- Secure administrator authentication
+- Dashboard with key performance indicators
+- Complete product management
+- Category management
+- Supplier management
+- Stock movement recording
+- Tracking of incoming stock, outgoing stock, and deliveries
+- Automatic threshold alert detection
+- Alert resolution
+- Commercial document creation
+- PDF document generation and download
+- Responsive web interface with Thymeleaf and Bootstrap
+
+---
+
+## Technologies Used
 
 - Java
 - Spring Boot
@@ -45,9 +44,9 @@ L'application permet de suivre les quantités disponibles, d'enregistrer les ent
 
 ---
 
-## Architecture du projet
+## Project Architecture
 
-Le projet suit une architecture en couches :
+The project follows a layered architecture:
 
 ```text
 src/main/java
@@ -57,116 +56,116 @@ src/main/java
       ├── model
       ├── repository
       └── service
-````
+```
 
-### Rôle des packages
+### Package Roles
 
-| Package      | Description                                             |
-| ------------ | ------------------------------------------------------- |
-| `config`     | Configuration de sécurité et initialisation des données |
-| `controller` | Gestion des routes web                                  |
-| `model`      | Entités JPA et énumérations                             |
-| `repository` | Interfaces Spring Data JPA                              |
-| `service`    | Logique métier et génération PDF                        |
-
----
-
-## Modules de l'application
-
-### Authentification
-
-L'accès à l'application est protégé par une page de connexion.
-Seul l'administrateur peut accéder aux fonctionnalités internes.
-
-### Tableau de bord
-
-Le tableau de bord affiche les informations principales :
-
-* nombre total de produits ;
-* valeur du stock ;
-* nombre de fournisseurs ;
-* nombre d'alertes actives ;
-* derniers mouvements enregistrés ;
-* produits proches de la rupture.
-
-### Produits
-
-Le module produits permet de :
-
-* consulter la liste des produits ;
-* ajouter un nouveau produit ;
-* modifier un produit existant ;
-* supprimer un produit ;
-* rechercher un produit ;
-* associer un produit à une catégorie et à un fournisseur.
-
-### Mouvements de stock
-
-Le module mouvements permet d'enregistrer :
-
-* les entrées de stock ;
-* les sorties de stock ;
-* les livraisons.
-
-Après chaque mouvement, la quantité du produit est automatiquement mise à jour.
-
-### Alertes
-
-Le module alertes permet de suivre les produits dont la quantité est inférieure ou égale au seuil défini.
-Une alerte peut être active ou résolue.
-
-### Documents commerciaux
-
-Le module documents permet de créer des documents commerciaux et de les télécharger au format PDF.
+| Package | Description |
+|---|---|
+| `config` | Security configuration and data initialization |
+| `controller` | Web route management |
+| `model` | JPA entities and enumerations |
+| `repository` | Spring Data JPA interfaces |
+| `service` | Business logic and PDF generation |
 
 ---
 
-## Captures d'écran
+## Application Modules
 
-Les captures d'écran principales de l'application sont :
+### Authentication
+
+Access to the application is protected by a login page.
+Only the administrator can access the internal features.
+
+### Dashboard
+
+The dashboard displays key information:
+
+* total number of products;
+* total stock value;
+* number of suppliers;
+* number of active alerts;
+* most recent recorded movements;
+* products approaching stock-out.
+
+### Products
+
+The product module allows the administrator to:
+
+* view the product list;
+* add a new product;
+* update an existing product;
+* delete a product;
+* search for a product;
+* associate a product with a category and supplier.
+
+### Stock Movements
+
+The stock movement module records:
+
+* incoming stock;
+* outgoing stock;
+* deliveries.
+
+The product quantity is automatically updated after each movement.
+
+### Alerts
+
+The alert module tracks products whose available quantity is less than or equal to the configured threshold.
+An alert can be active or resolved.
+
+### Commercial Documents
+
+The document module creates commercial documents and allows them to be downloaded in PDF format.
+
+---
+
+## Screenshots
+
+The main application screenshots are:
 
 ```text
 01-login.png
 02-dashboard.png
-03-produits.png
-04-formulaire-produit.png
-05-mouvements.png
-06-alertes.png
+03-products.png
+04-product-form.png
+05-movements.png
+06-alerts.png
 07-documents.png
 08-categories.png
-09-fournisseurs.png
+09-suppliers.png
 ```
 
-Elles illustrent le parcours utilisateur depuis la connexion jusqu'à la gestion complète du stock.
+They illustrate the complete user journey, from authentication to stock management.
 
 ---
 
-## Installation et exécution
+## Installation and Execution
 
-### 1. Cloner le projet
+### 1. Clone the Project
 
 ```bash
-git clone https://github.com/halima200431/gestion_stock.git
+git clone https://github.com/bgoussama/gestion_stock.git
 cd gestion_stock
 ```
 
-### 2. Lancer l'application avec Maven
+### 2. Run the Application with Maven
 
-Sous Windows :
+On Windows:
 
 ```bash
 .\mvnw.cmd spring-boot:run
 ```
 
-Sous Linux ou macOS :
+On Linux or macOS:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-### 3. Accéder à l'application
+### 3. Access the Application
 
-Ouvrir le navigateur puis accéder à :
+Open a browser and visit:
 
 ```text
 http://localhost:8080
@@ -174,26 +173,28 @@ http://localhost:8080
 
 ---
 
-## Identifiants de connexion
+## Login Credentials
 
 ```text
-Nom d'utilisateur : admin
-Mot de passe      : admin123
+Username: admin
+Password: admin123
 ```
+
+> These default credentials are intended for local demonstration only and should be changed before any deployment.
 
 ---
 
-## Base de données
+## Database
 
-Par défaut, l'application peut utiliser une base de données H2 pour les tests et le développement.
+By default, the application can use an H2 database for testing and development.
 
-Exemple d'accès à la console H2 :
+Example H2 console address:
 
 ```text
 http://localhost:8080/h2-console
 ```
 
-Les paramètres exacts dépendent de la configuration définie dans le fichier :
+The exact settings depend on the configuration defined in:
 
 ```text
 src/main/resources/application.properties
@@ -203,39 +204,39 @@ src/main/resources/application.properties
 
 ## Tests
 
-Pour lancer les tests automatisés :
+Run the automated tests with:
 
 ```bash
 .\mvnw.cmd test
 ```
 
-Les tests permettent de vérifier :
+The tests verify:
 
-* le démarrage correct du contexte Spring ;
-* le fonctionnement du service de génération PDF.
-
----
-
-## Routes principales
-
-| Route                   | Méthode  | Description                 |
-| ----------------------- | -------- | --------------------------- |
-| `/login`                | GET/POST | Connexion                   |
-| `/`                     | GET      | Tableau de bord             |
-| `/products`             | GET/POST | Liste et ajout des produits |
-| `/products/{id}/edit`   | GET      | Modification d'un produit   |
-| `/products/{id}/delete` | POST     | Suppression d'un produit    |
-| `/movements`            | GET/POST | Gestion des mouvements      |
-| `/alerts`               | GET      | Liste des alertes           |
-| `/alerts/{id}/resolve`  | POST     | Résolution d'une alerte     |
-| `/documents`            | GET/POST | Gestion des documents       |
-| `/documents/{id}/pdf`   | GET      | Téléchargement PDF          |
-| `/categories`           | GET/POST | Gestion des catégories      |
-| `/suppliers`            | GET/POST | Gestion des fournisseurs    |
+* correct startup of the Spring application context;
+* operation of the PDF generation service.
 
 ---
 
-## Structure simplifiée du projet
+## Main Routes
+
+| Route | Method | Description |
+|---|---|---|
+| `/login` | GET/POST | Authentication |
+| `/` | GET | Dashboard |
+| `/products` | GET/POST | List and add products |
+| `/products/{id}/edit` | GET | Update a product |
+| `/products/{id}/delete` | POST | Delete a product |
+| `/movements` | GET/POST | Manage stock movements |
+| `/alerts` | GET | List alerts |
+| `/alerts/{id}/resolve` | POST | Resolve an alert |
+| `/documents` | GET/POST | Manage documents |
+| `/documents/{id}/pdf` | GET | Download a PDF document |
+| `/categories` | GET/POST | Manage categories |
+| `/suppliers` | GET/POST | Manage suppliers |
+
+---
+
+## Simplified Project Structure
 
 ```text
 gestion_stock
@@ -256,26 +257,23 @@ gestion_stock
 
 ---
 
-## Améliorations possibles
+## Possible Improvements
 
-* Ajouter plusieurs rôles utilisateurs
-* Ajouter un rôle magasinier
-* Relier les documents commerciaux aux mouvements de stock
-* Ajouter la gestion des lots
-* Ajouter la gestion des emplacements de stockage
-* Ajouter un système de codes-barres
-* Ajouter plus de tests unitaires et fonctionnels
-* Ajouter une API REST pour une future application mobile
+* Add multiple user roles
+* Add a warehouse manager role
+* Link commercial documents to stock movements
+* Add batch management
+* Add storage location management
+* Add a barcode system
+* Add more unit and functional tests
+* Add a REST API for a future mobile application
 
 ---
 
-## Auteur
+## Author
 
-Projet réalisé dans le cadre d'un travail académique.
+Project developed as part of an academic assignment.
 
-**Application :** StockPilot
-**Type :** Application web de gestion de stock
-**Technologies :** Spring Boot, Thymeleaf, Spring Data JPA, Spring Security
-
-```
-```
+**Application:** StockPilot  
+**Type:** Stock management web application  
+**Technologies:** Spring Boot, Thymeleaf, Spring Data JPA, Spring Security
